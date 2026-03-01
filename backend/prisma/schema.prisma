@@ -1,16 +1,17 @@
-  generator client {
+generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-   url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
 }
 
 model User {
   id            String         @id @default(cuid())
   email         String         @unique
   subscriptions PushSubscription[]
+  orders        Order[]        // Orders placed by this user (if waiter)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -23,4 +24,24 @@ model PushSubscription {
   userId         String
   user           User     @relation(fields: [userId], references: [id])
   createdAt      DateTime @default(now())
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  tableNumber Int
+  items       String[] // Array of ordered items
+  status      OrderStatus @default(PENDING)
+  createdBy   String  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Optional: link to user who created
+  user        User?    @relation(fields: [createdBy], references: [email])
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  READY
+  DELIVERED
 }
