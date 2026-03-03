@@ -1,11 +1,8 @@
 self.addEventListener("push", (event) => {
-  // console.log("📱 Push received in Service Worker");
-
   let data = {};
 
   try {
     data = event.data.json();
-    // console.log("Push data:", data);
   } catch (e) {
     data = {
       title: "New Notification",
@@ -42,9 +39,6 @@ self.addEventListener("push", (event) => {
 
 // 2. WHEN USER CLICKS NOTIFICATION
 self.addEventListener("notificationclick", (event) => {
-  // console.log("👆 Notification clicked:", event.action);
-  // console.log("Notification data:", event.notification.data);
-
   event.notification.close();
 
   const action = event.action;
@@ -53,7 +47,6 @@ self.addEventListener("notificationclick", (event) => {
 
   // Handle different actions
   if (action === "dismiss") {
-    // console.log("❌ Notification dismissed");
     return;
   }
 
@@ -87,11 +80,9 @@ self.addEventListener("notificationclick", (event) => {
 
 // 3. INSTALL/ACTIVATE EVENTS
 self.addEventListener("install", (event) => {
-  // console.log("🔧 Service Worker installed");
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
-  // console.log("✅ Service Worker activated");
   return self.clients.claim();
 });
