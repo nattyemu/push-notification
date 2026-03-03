@@ -57,7 +57,7 @@ self.addEventListener("notificationclick", (event) => {
       for (const client of clientList) {
         if (client.url.includes("localhost:5173") && "focus" in client) {
           client.postMessage({
-            type: "OPEN_ORDER",
+            type: "OPEN_NOTIFICATION",
             orderId: orderId,
           });
           return client.focus();
@@ -68,7 +68,7 @@ self.addEventListener("notificationclick", (event) => {
         if (newClient && orderId) {
           setTimeout(() => {
             newClient.postMessage({
-              type: "OPEN_ORDER",
+              type: "OPEN_NOTIFICATION",
               orderId: orderId,
             });
           }, 1000);
