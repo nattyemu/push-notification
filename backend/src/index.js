@@ -16,7 +16,6 @@ const PORT = process.env.PORT || 3000;
 // Initialize WebSocket Manager
 const wsManager = new WebSocketManager(server);
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -27,7 +26,7 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY,
 );
 
-// PUSH NOTIFICATION ROUTES (Your existing code)
+// PUSH NOTIFICATION ROUTES
 
 app.get("/api/vapid-public-key", (req, res) => {
   res.json({ publicKey: process.env.VAPID_PUBLIC_KEY });
@@ -43,7 +42,6 @@ app.post("/api/subscribe/:email", async (req, res) => {
       user = await prisma.user.create({ data: { email } });
     }
 
-    // Check if subscription already exists
     const existing = await prisma.pushSubscription.findFirst({
       where: { endpoint },
     });
@@ -71,7 +69,7 @@ app.post("/api/subscribe/:email", async (req, res) => {
 app.post("/api/send/:email", async (req, res) => {
   try {
     const { email } = req.params;
-    const { title, body, orderId } = req.body; // Add orderId
+    const { title, body, orderId } = req.body
 
     const user = await prisma.user.findUnique({
       where: { email },
@@ -93,7 +91,6 @@ app.post("/api/send/:email", async (req, res) => {
         timestamp: Date.now(),
       },
       actions: [
-        // Add action buttons
         {
           action: "view_order",
           title: "View message",
