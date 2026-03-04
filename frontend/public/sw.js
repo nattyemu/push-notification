@@ -37,7 +37,7 @@ self.addEventListener("push", (event) => {
   );
 });
 
-// 2. WHEN USER CLICKS NOTIFICATION
+// 2. WHEN CLICKS NOTIFICATION
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
