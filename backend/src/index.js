@@ -215,7 +215,7 @@ app.get("/api/ws-stats", (req, res) => {
 
 // Start server
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`🔌 WebSocket ready at ws://localhost:${PORT}`);
-  console.log(`📊 WebSocket stats: http://localhost:${PORT}/api/ws-stats`);
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`WebSocket ready at ws://localhost:${PORT}`);
+  console.log(`WebSocket stats: http://localhost:${PORT}/api/ws-stats`);
 });
