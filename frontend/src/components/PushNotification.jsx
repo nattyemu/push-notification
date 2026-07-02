@@ -18,7 +18,7 @@ function PushNotification() {
         const { data } = await axios.get(`${API_URL}/api/vapid-public-key`);
         setPublicKey(data.publicKey);
       } catch (error) {
-        setStatus("❌ Failed to get public key");
+        setStatus("Failed to get public key");
       }
     };
     fetchPublicKey();
@@ -29,7 +29,7 @@ function PushNotification() {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/sw.js")
-        .then((reg) => console.log("✅ SW registered"))
+        .then((reg) => console.log("SW registered"))
         .catch((err) => console.error("SW failed:", err));
     }
   }, []);
@@ -38,7 +38,7 @@ function PushNotification() {
     const result = await Notification.requestPermission();
     setPermission(result);
     setStatus(
-      result === "granted" ? "✅ Permission granted" : "❌ Permission denied",
+      result === "granted" ? "Permission granted" : "Permission denied",
     );
   };
 
