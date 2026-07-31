@@ -181,7 +181,7 @@ app.post("/api/orders", async (req, res) => {
     });
 
     // Also broadcast via WebSocket
-    // This requires access to wsManager - we'd need to import it
+    // This requires access to wsManager - we need to import it
     // For now, just return the order
 
     res.json({ success: true, order });
