@@ -118,7 +118,7 @@ app.post("/api/send/:email", async (req, res) => {
       failed: results.filter((r) => r.status === "rejected").length,
     });
   } catch (error) {
-    console.error("Send error:", error);
+    // console.error("Send error:", error);
     res.status(500).json({ error: error.message });
   }
 });
