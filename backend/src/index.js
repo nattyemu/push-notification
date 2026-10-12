@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 // Initialize WebSocket Manager
 const wsManager = new WebSocketManager(server);
 
+// cors
 app.use(cors());
 app.use(express.json());
 
